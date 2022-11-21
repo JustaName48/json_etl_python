@@ -1,0 +1,25 @@
+[
+    {
+        "nombre": "Periquito",
+        "apellido": "Perez",
+        "DNI": "P10.P10.P10 <(^^)",
+        "guardarropa": [
+            {
+                "prenda": "sombrerito de copa",
+                "cantidad": 3
+            },
+            {
+                "prenda": "lentes de sol",
+                "cantidad": 85
+            },
+            {
+                "prenda": "smoking",
+                "cantidad": 5
+            },
+            {
+                "prenda": "pa\u00f1uelo de bolsillo",
+                "cantidad": 2
+            }
+        ]
+    }
+]

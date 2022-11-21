@@ -15,6 +15,9 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "2.0"
 
 import json
+import os
+
+os.chdir(os.path.dirname(__file__))
 
 
 def json_create():
@@ -41,6 +44,8 @@ def json_create():
                  }
 
     json_test = {"max": max_json, "emma": emma_json}
+# Con los dos diccionarios creamos una estructura más compleja, es decir un nuevo diccionario
+# que tiene 2 elementos. En un diccionario unimos a dos elementos.
 
     print('Imprimir json como un objeto')
     print(emma_json)
@@ -75,8 +80,10 @@ def json_serialize():
                       ]
                    }
 
-    with open('mi_json.json', 'w') as jsonfile:
-        data = [estudiante1]
+    with open('mi_json.json', 'w') as jsonfile: # Creo un archivo tipo JSON.
+        data = [estudiante1] # La data que se le pasa con .dump tiene que tener formato de lista!!!
+        # Puede ser lista de diccionarois. No se le puede mandar un archivo tipo 
+        # diccionario como estudiante1 a un .json, la data debe ser en forma de lista.
         json.dump(data, jsonfile, indent=4)
 
 
@@ -97,10 +104,19 @@ def json_deserialize():
                       ]
                    }
 
+# 3 procesos: Abre archivo, identifica JSON y lo extra, añadir el segundo estudiante.
+# En el primero leo la información del archivo JSON, le paso el nombre
+# y el alias. Tengo que deserializar la información con el método LOAD.
+# Nos quedamos solamente con lo que tenga formato tipo json, se identifica y se guarda.
+# Al deserializar la información está en formato diccionario, lo que permite
+# añadir o agregarle información con otro diccionario
+# Se le agrega a la variable current_data la info del estudiante2 con append.
     with open('mi_json.json', 'r') as jsonfile:
-        current_data = json.load(jsonfile)
-        current_data.append(estudiante2)
+        current_data = json.load(jsonfile) # Se extrae una lista de diccionarios
+        current_data.append(estudiante2) # Por eso se puede usar append.
 
+# Ahora se sobreescribe el archivo, se borra y empieza de vuelta.
+# Le damos formato JSON a la información guardada
     with open('mi_json.json', 'w') as jsonfile:
         json.dump(current_data, jsonfile, indent=4)
 

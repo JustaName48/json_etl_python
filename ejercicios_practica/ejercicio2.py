@@ -40,10 +40,57 @@ if __name__ == '__main__':
     # del JSON recolectado. Al finalizar el bucle deberá tener la data
     # de los 10 usuarios con cuantos títulos completó cada uno.
 
+    response = requests.get("https://jsonplaceholder.typicode.com/todos")
+    data = response.json()
+    
+    # Inicialización de variables:
+    titulos_completados = []
+    nombre_usuarios = []
+    j = 1
+    max = 0
+    completos = 0
+
+    # Aclaración: Se podría obviar el calculo del usuario máximo y en la línea 59 usar 10
+    # en vez de la variable max, pero de esta forma se puede ejecutar el programa sin tener
+    # que saber la cantidad máxima de usuarios.
+
+    for user in data:
+        if user["userId"] > max:
+            max = user["userId"] 
+
+    for i in range(1, max+1):
+        for user in data:
+            if user["userId"] == i:
+                if user["completed"] == True:
+                    completos += 1
+        
+        titulos_completados.append(completos)  
+        completos = 0
+    
+    print(titulos_completados)
+   
+
     # Debe poder graficar dicha información en un gráfico de barras.
     # En caso de no poder hacer el gráfico comience por usar print
     # para imprimir cuantos títulos completó cada usuario
     # y verifique si los primeros usuarios (mirando la página a ojo)
     # los datos recolectados son correctos.
 
-    print("terminamos")
+    for i in range(1, max+1):
+        for user in data:
+            if user["userId"] == j:
+                nombre_usuarios.append(j)
+                j += 1
+
+    fig = plt.figure() 
+
+    ax = fig.add_subplot()
+    ax.bar(nombre_usuarios,titulos_completados, color="tab:purple", label="N° usuario")
+    ax.set_title("Titulos Completados")
+    ax.set_ylabel(" Titulos ")
+    ax.set_xlabel(" Usuarios ")
+    ax.legend()
+    plt.xticks(nombre_usuarios)
+    plt.show() 
+
+print("terminamos")
